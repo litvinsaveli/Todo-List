@@ -73,8 +73,11 @@ class TaskManager(object):
     def all_tasks(self):
         rows = self.session.query(Table).order_by(Table.deadline).all()
         print()
-        for index, row in enumerate(rows, 1):
-            print(f"{index}. {row.task}.", datetime.strftime(row.deadline, "%d %b"))
+        if len(rows) != 0:
+            for index, row in enumerate(rows, 1):
+                print(f"{index}. {row.task}.", datetime.strftime(row.deadline, "%d %b"))
+        else:
+            print("Nothing to do!")
         print()
 
     def missed_tasks(self):
